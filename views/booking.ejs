@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</head>
+<body>
+  <script>
+    const RAZORPAY_KEY = "<%=razorpayKey%>";
+    console.log("🔑 Razorpay Key:", RAZORPAY_KEY);
+  </script>
+    <header class="ks-header">
+        <div class="ks-logo-title">
+            <img src="assests/logo.png" alt="Logo" class="ks-logo">
+            <span class="ks-title">किसान सेवा</span>
+        </div>
+        <form class="ks-search-bar">
+            <input type="text" placeholder="सेवा खोजें..." class="ks-search-input">
+            <button type="submit" class="ks-search-btn"><i class="fa fa-search"></i></button>
+        </form>
+        <div class="ks-actions">
+            <button class="ks-lang-btn"><i class="fa fa-language"></i></button>
+            <button class="ks-login-btn" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </header>
+    <main>
+        <section class="booking-section">
+            <button class="back-btn" onclick="window.location.href='/index'">
+                <i class="fa fa-arrow-left"></i> Back
+            </button>
+            <h2 class="booking-title">Confirm Booking</h2>
+            <div class="booking-details" id="booking-details">
+                
+            </div>
+        </section>
+    </main>
+
+    <script>
+    // Get booking data from query string
+    function getBookingData() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            img: params.get('img'),
+            title: params.get('title'),
+            price: params.get('price')
+        };
+    }
+    function renderBookingDetails() {
+      console.log("✅ renderBookingDetails() called");
+
+        const data = getBookingData();
+        const container = document.getElementById('booking-details');
+        if (!data.img || !data.title || !data.price) {
+            container.innerHTML = '<p>Booking details not found.</p>';
+            return;
+        }
+        container.innerHTML = `
+            <div class="machinery-card booking-card">
+                <img src="${data.img}" alt="${data.title}" class="machinery-img">
+                <div class="machinery-info">
+                    <div class="machinery-desc">${data.title}</div>
+                    <div class="machinery-price">${data.price}</div>
+                </div>
+            </div>
+            <div class="payment-methods">
+                <label for="payment-title">Choose Payment Method:</label>
+                <div class="payment-options">
+                    <label><input type="radio" name="payment" value="UPI" checked> <span>UPI</span></label>
+                    <label><input type="radio" name="payment" value="Cash on Delivery"> <span>Cash on Delivery</span></label>
+                </div>
+                <button id="final-book-btn" style="width:100%;background:#388e3c;color:#fff;font-size:1.1rem;padding:12px 0;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Book</button>
+            </div>
+            <div id="booking-complete-msg" style="display:none;text-align:center;font-size:1.2rem;color:#1976d2;font-weight:600;margin-top:18px;background:#e3f2fd;border-radius:6px;padding:10px 0;"></div>
+            <div id="tracking-btn-container" style="display:none;text-align:center;margin-top:18px;">
+                <button id="tracking-btn" style="background:#388e3c;color:#fff;font-size:1rem;padding:10px 32px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Tracking</button>
+            </div>
+            <div id="tracking-map-container" style="display:none;text-align:center;margin-top:18px;">
+                <iframe id="tracking-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.096551801355!2d77.72709597539288!3d25.53516057749482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3970c77e5b537133%3A0x5062d50418ad45e8!2sUniversity%20Institute%20of%20Technology%20RGPV%20Shivpuri!5e0!3m2!1sen!2sin!4v1757760096000!5m2!1sen!2sin" width="340" height="220" style="border:0;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.12);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div id="upi-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:999;align-items:center;justify-content:center;">
+                <div style="background:#fff;padding:32px 24px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-align:center;max-width:320px;margin:auto;">
+                    <h3 style="margin-bottom:18px;color:#388e3c;">Scan UPI QR Code</h3>
+                    <img id="upi-qr-img" src="" alt="UPI QR" style="width:180px;height:180px;object-fit:cover;border-radius:8px;border:1px solid #eee;margin-bottom:18px;">
+                    <br>
+                    <button id="scan-btn" style="background:#1976d2;color:#fff;font-size:1rem;padding:10px 32px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Scanned</button>
+                </div>
+            </div>
+        `;
+        document.getElementById('final-book-btn').onclick = function () {
+          console.log("✅ Book button clicked");
+
+  const data = getBookingData();
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+  const bookingData = {
+    img: data.img,
+    title: data.title,
+    price: data.price,
+    paymentMethod: paymentMethod
+  };
+
+  fetch('/api/bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bookingData)
+  })
+  .then(res => res.json())
+    .then(result => {
+      console.log("📥 Booking API response:", result);
+      
+  if (result.bookingId) {
+    if (paymentMethod === 'Cash on Delivery') {
+      document.getElementById('booking-complete-msg').textContent = 'Booking confirmed!';
+      document.getElementById('booking-complete-msg').style.display = 'block';
+      document.getElementById('tracking-btn-container').style.display = 'block';
+      document.getElementById('tracking-btn').onclick = function () {
+        document.getElementById('tracking-map-container').style.display = 'block';
+      };
+    } else if (paymentMethod === 'UPI') {
+      const cleanAmount = parseInt(data.price.replace(/\D/g, '')) * 100;
+
+fetch('/api/payments/initiate', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ amount: cleanAmount, bookingId: result.bookingId })
+})
+
+      .then(res => res.json())
+      .then(order => {
+        const options = {
+          key: RAZORPAY_KEY, 
+          amount: order.amount,
+          currency: 'INR',
+          name: 'किसान सेवा',
+          description: data.title,
+          order_id: order.id,
+          handler: function (response) {
+            fetch('/api/payments/confirm', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                bookingId: result.bookingId,
+                razorpay_payment_id: response.razorpay_payment_id
+              })
+            }).then(() => {
+              document.getElementById('booking-complete-msg').textContent = 'Payment successful!';
+              document.getElementById('booking-complete-msg').style.display = 'block';
+              document.getElementById('tracking-btn-container').style.display = 'block';
+              document.getElementById('tracking-btn').onclick = function () {
+                document.getElementById('tracking-map-container').style.display = 'block';
+              };
+            });
+          }
+        };
+        const rzp = new Razorpay(options);
+        rzp.open();
+       console.log("🚀 Opening Razorpay popup with key:", RAZORPAY_KEY);
+
+
+      });
+    }
+  } else {
+    alert('Booking failed: ' + result.error);
+  }
+})
+
+
+    }}
+    console.log("✅ Booking page script loaded");
+
+    renderBookingDetails();
+    </script>
+
+
+</body>
+</html>

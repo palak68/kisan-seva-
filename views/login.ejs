@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>किसान सेवा लॉगिन</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      .devanagari { font-family: 'Noto Sans Devanagari', 'Mangal', 'Kokila', Arial, sans-serif; }
+    </style>
+</head>
+<body>
+    <main class="login-main">
+        <section class="login-card single-card">
+            <header class="logo-title-card center-logo">
+                <img src="images/peasant.png" alt="किसान सेवा लोगो" class="logo-card">
+                <h1 id="site-title" class="devanagari" style="font-family: 'Modak', 'Noto Sans Devanagari', 'Mangal', 'Kokila', Arial, sans-serif; font-size: 2.8rem; font-weight: 700; color: #388a2f; letter-spacing: 2px;">किसान सेवा</h1>
+            </header>
+            <h2 id="login-heading" class="devanagari">लॉगिन करें</h2>
+            <form id="login-form">
+                                <input type="text" id="email" class="devanagari" placeholder="ईमेल या मोबाइल नंबर" required>
+                                <div class="password-box">
+                                    <input type="password" id="password" class="devanagari password-input" placeholder="पासवर्ड" required>
+                                    <button type="button" class="toggle-password" tabindex="-1">
+                                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/eye.svg" alt="Show" class="eye-icon">
+                                    </button>
+                                </div>
+                <a href="/forgetpassword" id="forgot-link" class="forgot-link devanagari">पासवर्ड भूल गए?</a>
+                <button type="submit" id="login-btn" class="devanagari">लॉगिन</button>
+            </form>
+            <a href="/signup" id="signup-link" class="signup-link devanagari">साइन अप करें</a>
+            <div class="divider"><span id="or-text" class="devanagari">या</span></div>
+            <div class="social-login-card">
+                <button class="social gmail" title="Google"><img src="https://img.icons8.com/color/36/gmail-new.png"/></button>
+                <button class="social facebook" title="Facebook"><img src="https://img.icons8.com/color/36/facebook-new.png"/></button>
+                <button class="social apple" title="Apple"><img src="https://img.icons8.com/ios-filled/36/mac-os.png"/></button>
+            </div>
+        </section>
+    </main>
+    <script src="/JS/login.js"></script>
+</body>
+</html>

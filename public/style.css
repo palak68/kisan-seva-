@@ -1,0 +1,249 @@
+/* Password box styling for icon inside input */
+.password-box {
+    position: relative;
+    width: 100%;
+}
+.password-input {
+    width: 100%;
+    padding-right: 38px;
+    box-sizing: border-box;
+}
+.toggle-password {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.eye-icon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.7;
+}
+.toggle-password:focus {
+    outline: none;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0f7fa 0%, #a8e063 100%);
+    min-height: 100vh;
+}
+
+.login-main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2vw;
+    box-sizing: border-box;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(56, 171, 47, 0.10);
+    max-width: 98vw;
+    width: 100%;
+    padding: 18px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.logo-title-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.logo-card {
+    width: 32px;
+    height: 32px;
+}
+
+.logo-title-card h1 {
+    font-size: 1.1rem;
+    color: #388a2f;
+    margin: 0;
+}
+
+#login-heading {
+    text-align: center;
+    margin-bottom: 14px;
+    color: #388a2f;
+    font-size: 1rem;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 8px 8px;
+    border: 1px solid #b2d8b2;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #f7fff7;
+    transition: border 0.2s;
+}
+
+input:focus {
+    border: 1.5px solid #388a2f;
+    outline: none;
+}
+
+.forgot-link, .signup-link {
+    display: block;
+    font-size: 0.85rem;
+    color: #388a2f;
+    text-align: right;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin: 4px 0 10px 0;
+}
+
+.signup-link {
+    text-align: center;
+    color: #1877f3;
+    font-weight: 500;
+    margin: 8px 0 0 0;
+}
+
+.forgot-link:hover, .signup-link:hover {
+    color: #56ab2f;
+}
+
+#login-btn, #signup-btn {
+    padding: 10px;
+    background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(56, 171, 47, 0.08);
+    transition: background 0.2s;
+}
+
+#send-code-btn, #reset-btn {
+    padding: 10px;
+    background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(56, 171, 47, 0.08);
+    transition: background 0.2s;
+}
+
+#login-btn:hover, #signup-btn:hover {
+    background: linear-gradient(90deg, #388a2f 0%, #a8e063 100%);
+}
+#send-code-btn:hover, #reset-btn:hover {
+    background: linear-gradient(90deg, #388a2f 0%, #a8e063 100%);
+}
+
+.divider {
+    width: 100%;
+    text-align: center;
+    margin: 14px 0 8px 0;
+    color: #388a2f;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.social-login-card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 0;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7fff7;
+    border: 1px solid #b2d8b2;
+    border-radius: 50%;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(56, 171, 47, 0.05);
+}
+
+.social img {
+    width: 18px;
+    height: 18px;
+}
+
+.social:hover {
+    background: #e6ffe6;
+    box-shadow: 0 4px 16px rgba(56, 171, 47, 0.12);
+}
+
+@media (min-width: 600px) {
+    .login-main {
+        align-items: center;
+        padding-top: 0;
+    }
+    .login-card {
+        max-width: 400px;
+        padding: 32px 24px;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(56, 171, 47, 0.18);
+    }
+    .logo-card {
+        width: 48px;
+        height: 48px;
+    }
+    .logo-title-card h1 {
+        font-size: 1.3rem;
+    }
+    #login-heading {
+        font-size: 1.3rem;
+    }
+    .social-login-card {
+        gap: 24px;
+    }
+    .social {
+        width: 48px;
+        height: 48px;
+        padding: 12px;
+    }
+    .social img {
+        width: 28px;
+        height: 28px;
+    }
+    .forgot-link, .signup-link {
+        font-size: 0.98rem;
+    }
+    input {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+}

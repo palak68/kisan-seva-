@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kisan-seva</title>
+    <link rel="stylesheet" href="index.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="ks-header">
+        <div class="ks-logo-title">
+            <img src="images/logo (1).png" alt="Logo" class="ks-logo">
+            <span class="ks-title">किसान सेवा</span>
+        </div>
+        <form class="ks-search-bar">
+            <input type="text" placeholder="सेवा खोजें..." class="ks-search-input" data-translate="search-input">
+            <button type="submit" class="ks-search-btn"><i class="fa fa-search"></i></button>
+        </form>
+        <div class="ks-actions">
+    <button class="ks-lang-btn" data-translate="lang-btn"><i class="fa fa-language"></i> EN</button>
+
+    <button id="loginBtn" class="ks-login-btn" onclick="window.location.href='/login'" data-translate="login-btn">
+        लॉगिन
+    </button>
+    <button id="logoutBtn" class="ks-logout-btn" style="display:none;" data-translate="logout-btn">
+        लॉगआउट
+    </button>
+</div>
+
+    </header>
+        <section class="carousel-container">
+            <div class="carousel">
+                <button class="carousel-btn left"><i class="fa fa-chevron-left"></i></button>
+                <div class="carousel-track">
+                    <a href="machinery-section" class="carousel-link"><img src="/images/tract.png" alt="Slide 1" class="carousel-img"></a>
+                    <a href="#slide2" class="carousel-link"><img src="/images/labour.png" alt="Slide 2" class="carousel-img"></a>
+
+                    <a href="#slide3" class="carousel-link"><img src="/images/rentequip.png" alt="Slide 3" class="carousel-img"></a>
+                </div>
+                <button class="carousel-btn right"><i class="fa fa-chevron-right"></i></button>
+            </div>
+        </section>
+            <section class="machinery-section">
+                <h2 class="machinery-title">Our Services</h2>
+                <div class="machinery-tabs">
+                    <button class="machinery-tab active" data-section="tractor" data-translate="tab-tractor">ट्रैक्टर/मशीनरी</button>
+                    <button class="machinery-tab" data-section="tools" data-translate="tab-tools">कृषि उपकरण</button>
+                    <button class="machinery-tab" data-section="labour" data-translate="tab-labour">मजदूर</button>
+                </div>
+                <div class="machinery-list" id="machinery-list">
+                    <!-- Cards will be rendered by JS for expand/collapse functionality -->
+                </div>
+                
+                <button class="machinery-viewmore" id="machinery-viewmore" data-translate="viewmore-btn">और देखें <span id="viewmore-icon"><i class="fa fa-chevron-down"></i></span></button>
+            </section>
+    <!-- Blog Section -->
+    <section id="blog-section" class="blog-section">
+        <h2 class="blog-title" data-translate="blog-title">किसानों के लिए उपयोगी ब्लॉग</h2>
+        <div class="blog-list">
+            <!-- Example Blog Card -->
+            <div class="blog-card">
+                <img src="https://blog.dhigroup.com/wp-content/uploads/2021/02/AdobeStock_303823739.jpeg" alt="Blog Image" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-heading">स्मार्ट सिंचाई सिस्टम से पानी की बचत</h3>
+                    <p class="blog-desc">पानी की कमी आज किसानों की सबसे बड़ी चुनौती है। स्मार्ट इरिगेशन सिस्टम (जैसे drip irrigation + IoT sensors) अब इस समस्या का समाधान बन रहे हैं। ये सिस्टम मिट्टी में नमी को मापकर उतना ही पानी देते हैं जितनी जरूरत हो। इससे 40–50% तक पानी की बचत होती है और फसल का उत्पादन भी बढ़ता है।</p>
+                    <a href="#" class="blog-readmore">और पढ़ें</a>
+                </div>
+             </div>
+
+             <div class="blog-card">
+                <img src="https://www.uasolutions.ch/wp-content/uploads/2021/08/Agriculture-drones-for-crop-spraying-a-field.jpg" alt="Blog Image" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-heading">ड्रोन टेक्नोलॉजी से खेती में क्रांति</h3>
+                    <p class="blog-desc">आजकल खेती में ड्रोन का इस्तेमाल तेजी से बढ़ रहा है। ये ड्रोन कीटनाशक और उर्वरक का समान रूप से छिड़काव करते हैं, जिससे किसान का समय और लागत दोनों बचते हैं। साथ ही ड्रोन से खेत की तस्वीरें लेकर फसल की सेहत का पता लगाया जा सकता है। इससे रोग और कीट समय रहते पकड़े जा सकते हैं। आने वाले समय में ड्रोन हर किसान का जरूरी साथी बनने वाले हैं।</p>
+                    <a href="#" class="blog-readmore">और पढ़ें</a>
+                </div>
+             </div>
+
+             <div class="blog-card">
+                <img src="https://kj1bcdn.b-cdn.net/media/102038/isro-agriculture-satellite.jpg" alt="Blog Image" class="blog-img">
+                <div class="blog-content">
+                    <h3 class="blog-heading">सैटेलाइट और AI से फसल की निगरानी</h3>
+                    <p class="blog-desc">आज सैटेलाइट इमेज और आर्टिफिशियल इंटेलिजेंस (AI) के जरिए फसल की निगरानी संभव है। किसान अपने मोबाइल ऐप से ही यह देख सकते हैं कि किस खेत में कौन-सी समस्या है। AI मॉडल मिट्टी, मौसम और नमी का डेटा लेकर किसानों को सलाह देते हैं कि कब खाद डालनी है, कब पानी देना है और कब कटाई करनी है। इससे लागत घटती है और उत्पादन बढ़ता है।</p>
+                    <a href="#" class="blog-readmore">और पढ़ें</a>
+                </div>
+            </div>
+            
+            <!-- Add more blog cards dynamically -->
+        </div>
+    </section>
+        <!-- About Us Section -->
+        <section id="about-section" class="about-section">
+            <h2 class="about-title" data-translate="about-title">हमारे बारे में</h2>
+            <div class="about-content">
+                <p class="about-desc">
+                    किसान सेवा का उद्देश्य किसानों को आधुनिक तकनीक, जानकारी और सेवाएं उपलब्ध कराना है ताकि वे अपनी कृषि को और बेहतर बना सकें। हम किसानों के लिए ट्रैक्टर, उपकरण, मजदूर, और उपयोगी ब्लॉग जैसी सुविधाएं प्रदान करते हैं। हमारा लक्ष्य है कि हर किसान को सही जानकारी और संसाधन मिले जिससे उनकी उपज और आय बढ़े।
+                </p>
+            </div>
+        </section>
+    <!-- ...existing code... -->
+
+    
+<!-- AI Chatbot Button and Chat Window -->
+<button class="ai-chatbot-btn" id="ai-chatbot-btn" title="Chatbot">
+    <i class="fa fa-robot"></i>
+</button>
+<div class="ai-chatbot-iframe-container" id="ai-chatbot-iframe-container">
+    <div class="ai-chatbot-header">
+    <span data-translate="chatbot-title"><i class="fa fa-robot"></i> एआई चैटबोट</span>
+        <button class="ai-chatbot-minimize" id="ai-chatbot-minimize" title="Minimize"><i class="fa fa-minus"></i></button>
+    </div>
+    <iframe src="https://agriculturechatbotpy-aahjbm4uizebddxoosq5cl.streamlit.app/?embedded=true" style="width:100%;height:100%;border:none;"></iframe>
+</div>
+
+<script src="JS/index.js"></script>
+        <!-- Footer Section -->
+        <footer class="ks-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3 class="footer-title">किसान सेवा</h3>
+                    <p class="footer-desc">आपके खेत का साथी - आधुनिक कृषि सेवाएं और जानकारी</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">होम</a>
+                    <a href="#machinery-section" class="footer-link">सेवाएं</a>
+                    <a href="#blog-section" class="footer-link">ब्लॉग</a>
+                    <a href="#about-section" class="footer-link">हमारे बारे में</a>
+                </div>
+                <div class="footer-contact">
+                    <p><i class="fa fa-envelope"></i> संपर्क: info@kisanseva.com</p>
+                    <p><i class="fa fa-phone"></i> हेल्पलाइन: 1800-123-456</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 किसान सेवा. सर्वाधिकार सुरक्षित.</span>
+            </div>
+        </footer>
+</body>
+</html>
+
+
